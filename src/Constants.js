@@ -26,3 +26,9 @@ export const SITE = {
   name: "IAN MWENDWA",
   description: "FULLSTACK DEVELOPER",
 };
+
+export const HERO =[
+  {content:"I build systems that scale, respond, and never crash."},
+  {content:"From reactive interfaces to resilient APIs,every component I touch is stripped, optimized, and reassembled for performance."},
+  {content:"No templates. No shortcuts. Just raw, engineered logic."}
+]
