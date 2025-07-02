@@ -1,10 +1,8 @@
-import Navbar from "../components/Navbar";
 
 const Hero = () => {
   return (
-    <section>
-     
-      <Navbar/>
+    <section className="relative h-screen bg-background text-text font-roboto overflow-hidden">
+
       
      
     </section>

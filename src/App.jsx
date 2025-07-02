@@ -1,11 +1,18 @@
+import Navbar from "./components/Navbar"
 import Hero from "./sections/Hero"
 
 
 function App() {
 
   return (
-    <>
-      <Hero/>
+    < >
+    <div className="bg-background relative">
+      <Navbar/>
+       <Hero/>
+      
+    </div>
+    
+    
     </>
   )
 }
