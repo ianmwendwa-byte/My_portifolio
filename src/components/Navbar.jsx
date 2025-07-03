@@ -7,11 +7,11 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className=" text-text sticky top-0 z-50 font-roboto">
+    <header className=" text-text sticky top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2">
       {/* TOP BAR */}
-      <nav className="flex items-center justify-between px-4 py-3 lg:px-8">
+      <nav className="flex items-center justify-between px-3 py-2 ">
          {/* My name */}
-        <span className="font-roboto md:text-base lg:text-xl ">{SITE.name}</span>
+        <span className="font-roboto text-base lg:text-xl ">{SITE.name}</span>
 
         {/* Desktop LINKS */}
         <ul className="hidden lg:flex gap-8 font-roboto">
@@ -56,7 +56,8 @@ const Navbar = () => {
       {/* MOBILE DRAWER */}
       {open && (
         <aside
-          className="fixed inset-0 bg-background/95 backdrop-blur-sm flex flex-col text-center p-6 lg:hidden"
+          className="fixed inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-none shadow-md 
+            flex flex-col text-center p-6 lg:hidden transition-transform duration-300 translate-x-0"
           role="dialog"
           aria-modal="true"
         >

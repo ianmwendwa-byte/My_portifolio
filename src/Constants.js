@@ -27,8 +27,8 @@ export const SITE = {
   description: "FULLSTACK DEVELOPER",
 };
 
-export const HERO =[
-  {content:"I build systems that scale, respond, and never crash."},
-  {content:"From reactive interfaces to resilient APIs,every component I touch is stripped, optimized, and reassembled for performance."},
-  {content:"No templates. No shortcuts. Just raw, engineered logic."}
+export const HEROS =[
+  {content:"I build high-performance, scalable, and resilient full-stack systems."},
+  {content:"My approach involves meticulous engineering of every layer,from seamless UIs to robust APIs,ensuring instant responsiveness and unwavering stability."},
+  {content:"Expect nothing less than purpose-built, optimized solutions designed for ultimate reliability."}
 ]
