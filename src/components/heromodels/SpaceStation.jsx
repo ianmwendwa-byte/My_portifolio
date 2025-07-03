@@ -7,40 +7,44 @@ Source: https://sketchfab.com/3d-models/space-station-3-a7a6ad10261149cab31aa394
 Title: Space Station 3
 */
 
-import React, { useEffect } from 'react' // Import useEffect
+import React, { useEffect } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'; 
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three'; // Import Three.js to access LoopRepeat
 
 export function SpaceStation(props) {
   const group = React.useRef()
   const { nodes, materials, animations } = useGLTF('/models/SpaceStation.glb')
-  // 'actions' will contain functions to play/stop/fade animations
-  // 'names' is an array of strings with the animation clip names
   const { actions, names } = useAnimations(animations, group)
 
   // --- Animation Activation Logic ---
   useEffect(() => {
-    // Log the names of available animations to the console.
-    // This is very helpful for debugging and knowing which animation to play.
-    console.log("SpaceStation Animation Clip Names:", names);
+    console.log("SpaceStation Animation Clip Names:", names); // Log all names
+    console.log("SpaceStation Animation Actions:", actions); // Log all actions
 
-    // Check if there are any animations loaded with the model
-    if (animations && animations.length > 0) {
-      // Attempt to play the first animation clip found.
-      // If your model has a specific animation you want (e.g., "Idle", "Spin"),
-      // replace `names[0]` with the exact string name, like `actions['Idle']`.
-      const firstAnimationName = names[0];
+    // Specifically target the animation named "animation"
+    const targetAnimationName = "animation";
+    const animationAction = actions[targetAnimationName];
 
-      if (firstAnimationName && actions[firstAnimationName]) {
-        console.log(`Playing SpaceStation animation: "${firstAnimationName}"`);
-        // Reset the animation, fade it in over 0.5 seconds, and play it.
-        // .setLoop(THREE.LoopRepeat) can be added if you want it to loop indefinitely.
-        actions[firstAnimationName].reset().fadeIn(0.5).play();
-      } else {
-        console.warn("No animation actions found for SpaceStation or first action is undefined.");
-      }
+    if (animationAction) {
+      console.log(`Attempting to play animation: "${targetAnimationName}"`);
+      // Set the animation to loop indefinitely
+      animationAction.setLoop(THREE.LoopRepeat, Infinity);
+      // Reset any previous state, fade in, and play
+      animationAction.reset().fadeIn(0.5).play();
+
+      // Optional: Log animation details for deeper debugging
+      console.log(`Animation "${targetAnimationName}" duration:`, animationAction.getClip().duration);
+      console.log(`Animation "${targetAnimationName}" enabled:`, animationAction.enabled);
+      console.log(`Animation "${targetAnimationName}" paused:`, animationAction.paused);
+
     } else {
-      console.log("No pre-baked animations found in the SpaceStation model.");
+      console.warn(`Animation clip "${targetAnimationName}" not found or action is undefined.`);
+      // Fallback: if 'animation' isn't found, try the first one
+      if (names.length > 0 && actions[names[0]]) {
+        console.log(`Falling back to playing animation: "${names[0]}"`);
+        actions[names[0]].reset().fadeIn(0.5).play();
+      }
     }
 
     // Cleanup function: This runs when the component unmounts or before the effect re-runs.
@@ -48,10 +52,9 @@ export function SpaceStation(props) {
     return () => {
       Object.values(actions).forEach(action => action.fadeOut(0.5).stop());
     };
-  }, [actions, animations, names]); // Dependencies: Re-run effect if these values change
+  }, [actions, animations, names]); // Dependencies
 
   // Optional: Add a subtle continuous rotation on top of GLTF animations
-  // This can give a sense of life even if the GLTF has no animations or for extra movement.
   useFrame(() => {
     if (group.current) {
       group.current.rotation.y += 0.001; // Rotate slowly around the Y-axis
