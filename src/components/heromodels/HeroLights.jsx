@@ -36,14 +36,7 @@ const HeroLights = () => (
       decay={2}             // Light fades quickly
       color="orange"        // Warm glow
     />
-    <pointLight
-      position={[0, 5, 0]} // Above the station
-      intensity={2}
-      distance={20}
-      decay={1}
-      color="cyan"          // Cool glow
-    />
-
+   
    </>
 );
 

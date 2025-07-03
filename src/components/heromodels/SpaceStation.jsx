@@ -9,7 +9,7 @@ Title: Space Station 3
 
 import React, { useEffect } from 'react' // Import useEffect
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'; // Optional: for subtle continuous rotation
+import { useFrame } from '@react-three/fiber'; 
 
 export function SpaceStation(props) {
   const group = React.useRef()
