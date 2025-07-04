@@ -11,28 +11,28 @@ const techStackIcons = [
   {
     name: "React Developer",
     modelPath: "/models/react_logo-transformed.glb",
-    scale: 0.25,
+    scale: 0.5,
     baseRotationSpeed: 0.01,
     isOrbiting: true,
   },
   {
     name: "Backend Developer",
     modelPath: "/models/node-transformed.glb",
-    scale: 1.25,
+    scale: 2.50,
     baseRotationSpeed: 0.012,
     isOrbiting: true,
   },
   {
     name: "Interactive Developer",
     modelPath: "/models/three.js-transformed.glb",
-    scale: 0.0125,
+    scale: 0.025,
     baseRotationSpeed: 0.009,
     isOrbiting: true,
   },
   {
     name: "Project Manager",
     modelPath: "/models/git-svg-transformed.glb",
-    scale: 0.0125,
+    scale: 0.025,
     baseRotationSpeed: 0.007,
     isOrbiting: false,
   },
@@ -121,16 +121,16 @@ const HeroModel = () => {
     orbitControlsMinDistance = 3;
     orbitControlsMaxDistance = 18;
   } else { // Desktop
-    orbitRadius = 3; // Original orbit radius
+    orbitRadius = 4; // Original orbit radius
     orbitSpeed = 0.005; // Original orbit speed
     cameraZPosition = 10; // Original camera distance
-    cameraFOV = 60; // Original FOV
+    cameraFOV = 50; // Original FOV
     orbitControlsMinDistance = 5;
     orbitControlsMaxDistance = 20;
   }
 
   return (
-    <Canvas camera={{ position: [0, 0, cameraZPosition], fov: cameraFOV }} shadows>
+    <Canvas camera={{ position: [5, 10, cameraZPosition], fov: cameraFOV }} shadows>
       <ambientLight intensity={1.5} color="#ffffff" />
       <HeroLights /> {/* Your lighting component */}
       <Particles />   {/* Your particles component */}

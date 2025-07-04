@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
 @import "tailwindcss";
+:root {
+  --gradient: radial-gradient(circle, #3A5E1B 0%, #000000 100%);
+}
+
+html,
+body {
+  width: 100dvw;
+  overflow-x: hidden;
+  color: #EEEEEE;
+  scroll-behavior: smooth;
+}
+
+section {
+  width: 100dvw;
+}
 @theme {
   --color-background: #000000;
   --color-primary:    #3A5E1B;

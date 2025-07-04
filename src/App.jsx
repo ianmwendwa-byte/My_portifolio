@@ -1,3 +1,5 @@
+import { ClassNames } from "@emotion/react"
+import About from "./sections/About"
 import Hero from "./sections/Hero"
 
 
@@ -5,10 +7,10 @@ function App() {
 
   return (
     < >
-    <div className="text-text h-screen w-full">
-      <Hero/> 
+      <Hero/>
+      {/* <About/>  */}
      
-    </div>
+   
     
     
     </>
