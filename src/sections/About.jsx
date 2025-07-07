@@ -1,12 +1,13 @@
 import React from 'react'
 import { services } from '../Constants'
-import Services from '../components/heromodels/Services'
+import Services from '../components/Services'
+
 
 const About = () => {
   return (
-    <section className='bg-conic-120 from-primary  to-background w-full lg:h-screen p-4'>
+    <section id='about' className='bg-conic-120 from-primary  to-background w-full lg:h-screen p-4'>
       <div>
-           <h1 className='font-bold text-center p-4'>ABOUT ME.</h1>
+           <h1 className='font-bold text-center text-4xl  p-4'>ABOUT ME</h1>
            <div className='flex flex-col lg:flex-row gap-6 items-center sm:w-full lg:max-w-4xl mx-auto' > 
             <div className='flex justify-center'>
               <img src='./img/my-profile.webp' alt='my profile' className='rounded-b-full border  object-cover '/>

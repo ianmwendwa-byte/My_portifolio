@@ -36,7 +36,7 @@ const dotRef = useRef();
 
 
   return (
-    <section className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col">
+    <section id='hero' className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col">
 
       {/* Navbar*/}
       <Navbar/>

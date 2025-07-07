@@ -84,3 +84,104 @@ export const services = [
     icon: "/assets/mobile.png", 
   }
 ];
+
+
+// skills
+
+export const skills = [
+  {
+    skillName: "JAVASCRIPT",
+    icon: "/assets/javascript.png",
+    progressPercentage: 90,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "3+ YEARS"
+  },
+  {
+    skillName: "REACTJS",
+    icon: "/assets/reactjs.png", 
+    progressPercentage: 98,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "3+ YEARS"
+  },
+  {
+    skillName: "NODEJS",
+    icon: "/assets/nodejs.png", 
+    progressPercentage: 80,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "2 YEARS"
+  },
+  {
+    skillName: "TypeScript",
+    icon: "/assets/typescript.png", 
+    progressPercentage: 80,
+    experienceLevel: "INTERMEDIATE",
+    yearsOfExperience: "1 YEAR"
+  },
+  {
+    skillName: "CSS",
+    icon: "/assets/css.png", 
+    progressPercentage: 98,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "4+ YEARS"
+  },
+  {
+    skillName: "SQL",
+    icon: "/assets/my-sql.png", 
+    progressPercentage: 90,
+    experienceLevel: "ADVANCED",
+    yearsOfExperience: "3+ YEARS"
+  },
+  {
+    skillName: "MONGODB",
+    icon: "/assets/mongodb.png", 
+    progressPercentage: 90,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "1+ YEARS"
+  },
+  {
+    skillName: "PHP",
+    icon: "/assets/php.png",
+    progressPercentage: 90,
+    experienceLevel: "ADVANCED",
+    yearsOfExperience: "3+ YEARS"
+  },
+  {
+    skillName: "REACT NATIVE",
+    icon: "/assets/react-native.png",
+    progressPercentage: 60,
+    experienceLevel: "intermediate",
+    yearsOfExperience: "1 YEAR"
+  },
+  {
+    skillName: "NEXT JS",
+    icon: "/assets/next-js.png",
+    progressPercentage: 70,
+    experienceLevel: "INTERMEDIATE",
+    yearsOfExperience: "1+ YEARS"
+  },
+  {
+    skillName: "TAILWIND CSS",
+    icon: "/assets/tailwind.png", 
+    progressPercentage: 98,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "2+ YEARS"
+  },
+  
+  {
+    skillName: "REDUX",
+    icon: "/assets/redux.png", 
+    progressPercentage: 90,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "3+ YEARS"
+  },
+  {
+    skillName: "Three.js",
+    icon: "/assets/threejs.svg", 
+    progressPercentage: 70,
+    experienceLevel: "INTERMEDIATE",
+    yearsOfExperience: "1 YEAR"
+  },
+  
+];
+
+
