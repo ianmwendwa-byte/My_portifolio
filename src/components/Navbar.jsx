@@ -7,7 +7,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className=" text-text sticky top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2">
+    <header className=" text-text fixed right-0 left-0 top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2">
       {/* TOP BAR */}
       <nav className="flex items-center justify-between px-3 py-2 ">
          {/* My name */}
@@ -19,7 +19,7 @@ const Navbar = () => {
             <li key={i}>
               <a
                 href={url}
-                className="hover:text-secondary transition-colors duration-200"
+                className="hover:text-secondary transition-all duration-300"
               >
                 {title}
               </a>
@@ -46,7 +46,7 @@ const Navbar = () => {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setOpen(true)}
-          className="lg:hidden hover:text-secondary transition-colors duration-200 focus:outline-none"
+          className="lg:hidden hover:text-secondary transition-all duration-200 focus:outline-none"
           aria-label="Open menu"
         >
           <MenuIcon fontSize="large" />
@@ -57,7 +57,7 @@ const Navbar = () => {
       {open && (
         <aside
           className="fixed inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-none shadow-md 
-            flex flex-col text-center p-6 lg:hidden transition-transform duration-300 translate-x-0"
+            flex flex-col text-center p-6 lg:hidden transition-all duration-300 translate-x-0"
           role="dialog"
           aria-modal="true"
         >

@@ -8,7 +8,7 @@ const Button = ({ link, text, Icon, className = '', external = false }) => {
       className={`
         inline-flex items-center justify-center
         px-6 py-3 rounded-lg
-        lg:backdrop-blur-md bg-primary/40 border border-primary/40
+        lg:backdrop-blur-md bg-primary/40 border border-primary/20
         shadow-lg hover:border-primary hover:border-2
         transition-all duration-300 ease-in-out
         transform hover:scale-105
@@ -19,7 +19,7 @@ const Button = ({ link, text, Icon, className = '', external = false }) => {
       {/* Render the icon if provided */}
       {Icon && <Icon className="mr-2"/>}
       {/* Render the button text */}
-      <span className="pointer-events-none">{text}</span>
+      <span className="pointer-events-none hidden md:inline">{text}</span>
     </a>
   );
 };

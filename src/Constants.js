@@ -65,3 +65,22 @@ export const techStackIcons = [
     rotation: [0, -Math.PI / 4, 0],
   },
 ];
+
+export const services = [
+  {
+    title: "Frontend Developer",
+    icon: "/assets/web.png", 
+  },
+   {
+    title: "Backend Developer",
+    icon: "/assets/backend.png", 
+  },
+  {
+    title: "UI/UX Designer",
+    icon: "/assets/creator.png", 
+  },
+  {
+    title: "Mobile Developer",
+    icon: "/assets/mobile.png", 
+  }
+];

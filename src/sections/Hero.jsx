@@ -19,7 +19,7 @@ const dotRef = useRef();
         yoyo: true,
         defaults: {
           duration: 1,
-          ease: "power1.inOut", 
+          ease: "bounce", 
         }
       });
 
@@ -53,13 +53,13 @@ const dotRef = useRef();
 
            <div className='flex flex-col justify-center items-center'>
           <div className='w-5 h-5 rounded-full bg-primary' />
-          <div className='w-1 sm:h-60 h-30 bg-linear-to-t from-text to-primary' />
+          <div className='w-1 h-30 lg:h-50 bg-linear-to-b from-primary to-text' />
         </div>
           <div>
           {HEROS.map((Hero, index) => (
             <p
               key={index}
-              className="font-roboto text-base sm:text-lg md:text-xl lg:text-2xl text-white line-clamp-4 lg:line-clamp-3 pb-3"
+              className="font-roboto text-base sm:text-lg md:text-xl lg:text-2xl text-white text-balance pb-3"
             >
               {Hero.content}
             </p>
@@ -75,6 +75,7 @@ const dotRef = useRef();
             <Button
               text={"My Work"}
               Icon={WorkIcon}
+              
             />
             <Button
               text={"Contact Me"}
@@ -93,9 +94,9 @@ const dotRef = useRef();
 
       
 
-      <div className='absolute bottom-0 w-full flex justify-center items-center'>
+      <div className='absolute bottom-1 w-full flex justify-center items-center'>
       <a href='#about'>
-        <div className='w-[35px]  h-[64px] rounded-3xl border-4 border-text flex justify-center items-start p-2'>
+        <div className='w-[35px]  h-[64px] rounded-3xl border-2 border-text flex justify-center items-start p-2'>
           <div
             ref={dotRef}
             className='w-3 h-3 rounded-full bg-text mb-1'
