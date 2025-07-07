@@ -1,4 +1,5 @@
-import React from 'react'; // Ensure React is imported
+import React, { useRef, useEffect } from 'react';
+import { gsap } from 'gsap'; 
 import Button from "../components/Button";
 import HeroModel from "../components/heromodels/HeroModel";
 import Navbar from "../components/Navbar";
@@ -8,6 +9,32 @@ import WorkIcon from '@mui/icons-material/Work';
 import CallIcon from '@mui/icons-material/Call';
 
 const Hero = () => {
+const dotRef = useRef();
+
+// Aniamtion of bouncing scroll
+  useEffect(() => {
+    if (dotRef.current) {
+      const tl = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        defaults: {
+          duration: 1,
+          ease: "power1.inOut", 
+        }
+      });
+
+      
+      tl.to(dotRef.current, {
+        y: 24,
+      });
+
+      return () => {
+        tl.kill(); 
+      };
+    }
+  }, []);
+
+
   return (
     <section className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col">
 
@@ -22,6 +49,13 @@ const Hero = () => {
       <div className="flex flex-col lg:flex-row lg:justify-between m-8 flex-grow ">
         {/* Hero Paragraphs and Buttons */}
         <div className="flex flex-col text-center lg:text-left lg:w-1/2 z-10">
+        <div className='flex flex-row items-start gap-5'>
+
+           <div className='flex flex-col justify-center items-center'>
+          <div className='w-5 h-5 rounded-full bg-primary' />
+          <div className='w-1 sm:h-60 h-30 bg-linear-to-t from-text to-primary' />
+        </div>
+          <div>
           {HEROS.map((Hero, index) => (
             <p
               key={index}
@@ -30,8 +64,10 @@ const Hero = () => {
               {Hero.content}
             </p>
           ))}
+          </div>
+          </div>
           {/* Buttons Div */}
-          <div className="mt-4 lg:mt-10 flex justify-between gap-4 w-full lg:justify-center"> {/* Added w-full */}
+          <div className="mt-4 lg:mt-10 flex justify-center gap-4 w-full lg:justify-between lg:pr-4">
             <Button
               text={"Download Resume"}
               Icon={DownloadIcon}
@@ -57,9 +93,16 @@ const Hero = () => {
 
       
 
-      <div className="w-full flex justify-center py-4 z-20">
-        <p className="text-white">icon</p> 
-      </div>
+      <div className='absolute bottom-0 w-full flex justify-center items-center'>
+      <a href='#about'>
+        <div className='w-[35px]  h-[64px] rounded-3xl border-4 border-text flex justify-center items-start p-2'>
+          <div
+            ref={dotRef}
+            className='w-3 h-3 rounded-full bg-text mb-1'
+          />
+        </div>
+      </a>
+    </div>
 
     </section>
   );
