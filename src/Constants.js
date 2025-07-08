@@ -227,4 +227,50 @@ export const tools = [
   },
 ];
 
+// projects
+export const projects = [
+  {
+    imageSrc: "/assets/oral-literature-project.png", 
+    title: "Oral Literature Platform",
+    description: "A modern web application designed to showcase and preserve African oral literature. It features a clean, intuitive interface for exploring traditional stories, poems, and folklore from various cultures. The platform is built with a focus on cultural preservation, accessibility, and engaging visual presentation, making rich heritage easily discoverable for a global audience.",
+    technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    liveSiteLink: "https://oral-literature-demo.vercel.app", 
+    githubLink: "https://github.com/yourusername/oral-literature-repo" 
+  },
+  {
+    imageSrc: "/assets/e-commerce-dashboard.png",
+    title: "E-commerce Admin Dashboard",
+    description: "A comprehensive administrative dashboard for managing an e-commerce platform. This robust system allows for product management, order tracking, user administration, and sales analytics. It provides a centralized, user-friendly interface for store owners to efficiently oversee their online business operations and make data-driven decisions.",
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Redux"],
+    liveSiteLink: "https://ecommerce-dashboard-demo.netlify.app",
+    githubLink: "https://github.com/yourusername/ecommerce-dashboard-repo"
+  },
+  {
+    imageSrc: "/assets/task-manager-app.png",
+    title: "Collaborative Task Manager",
+    description: "A real-time, collaborative task management application designed for teams. Users can create, assign, and track tasks, set deadlines, and receive notifications. Features include drag-and-drop task reordering, user authentication, and real-time updates across all connected clients, fostering efficient teamwork and project completion.",
+    technologies: ["React", "Firebase", "Zustand", "GSAP", "CSS"],
+    liveSiteLink: "https://task-manager-app-demo.web.app",
+    githubLink: "https://github.com/yourusername/task-manager-repo"
+  },
+  {
+    imageSrc: "/assets/portfolio-website.png",
+    title: "Personal Portfolio Website",
+    description: "A dynamic and interactive personal portfolio website showcasing full-stack development skills and projects. It features modern UI/UX design, smooth animations powered by GSAP, and responsive layouts for optimal viewing on all devices. The site serves as a professional showcase of capabilities and a platform for client engagement.",
+    technologies: ["React", "Tailwind CSS", "GSAP", "Vite"],
+    liveSiteLink: "https://your-portfolio-live-link.com",
+    githubLink: "https://github.com/yourusername/your-portfolio-repo"
+  },
+  {
+    imageSrc: "/assets/weather-app.png",
+    title: "Modern Weather App",
+    description: "A sleek and responsive weather application providing real-time weather data, forecasts, and interactive maps. Users can search for locations worldwide and get detailed information including temperature, humidity, wind speed, and precipitation. The app features a clean design and leverages a third-party weather API for accurate data.",
+    technologies: ["React", "API Integration", "CSS Modules"],
+    liveSiteLink: "https://weather-app-demo.vercel.app",
+    githubLink: "https://github.com/yourusername/weather-app-repo"
+  }
+];
+
+
+
 
