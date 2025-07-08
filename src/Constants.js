@@ -183,5 +183,48 @@ export const skills = [
   },
   
 ];
+//  tools
+export const tools = [
+  {
+    name: "Blender",
+    icon: "/assets/tech/Blender.png",
+  },
+  {
+    name: "Cinema 4D",
+    icon: "/assets/tech/Cinema4d.png",
+  },
+  {
+    name: "Docker",
+    icon: "/assets/tech/docker.png",
+  },
+  {
+    name: "Figma",
+    icon: "/assets/tech/figma.png",
+  },
+  {
+    name: "Git",
+    icon: "/assets/tech/git.png",
+  },
+  {
+    name: "Illustrator",
+    icon: "/assets/tech/Illustrator.png",
+  },
+  {
+    name: "Photoshop",
+    icon: "/assets/tech/Photoshop.png",
+  },
+  {
+    name: "Sublime Text",
+    icon: "/assets/tech/Simlime Text.png",
+  },
+  {
+    name: "Visual Studio",
+    icon: "/assets/tech/Visual Studio.png",
+  },
+  {
+    name: "VS Code",
+    icon: "/assets/tech/VSCode.png",
+  },
+];
 
 

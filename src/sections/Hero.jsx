@@ -42,7 +42,7 @@ const dotRef = useRef();
       <Navbar/>
 
       {/* Headline*/}
-      <div className="flex justify-center font-orbitron xs:text-xl sm:text-2xl md:text-3xl lg:text-5xl m my-5 md:my-10 lg:my-20 z-10 line-clamp-none">
+      <div className="flex justify-center font-orbitron  text-2xl md:text-3xl lg:text-5xl  mt-15 md:my-10 lg:my-20 z-10 line-clamp-none">
         <h1>{SITE.description}</h1>
       </div>
 
@@ -86,7 +86,7 @@ const dotRef = useRef();
 
         {/* 3D Model Container */}
         <figure>
-          <div className="w-full  lg:w-1/2  h-full min-h-[50vh] absolute bottom-0 top-0 right-0 lg:top-auto">
+          <div className="w-full  lg:w-1/2  h-full min-h-[50vh] absolute bottom-0 top-40 right-0 lg:top-auto">
             <HeroModel/>
           </div>
         </figure>

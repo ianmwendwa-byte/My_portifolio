@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import SkillsCard from '../components/SkillsCard';
 // Assuming 'skills' from '../Constants' is the correct data source
 // and it has the structure: array of objects with skillName, icon, etc.
-import { skills } from '../Constants';
+import { skills, tools } from '../Constants';
+import BallCanvas from '../components/canvas/Ball';
 
 const Skills = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,7 +97,7 @@ const Skills = () => {
                 ${
                   currentPage === pageNumber
                     ? 'bg-white/10 backdrop-blur-md border border-primary/50 text-white shadow-lg'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600' // Default for inactive
+                    : 'bg-white/10 backdrop-blur-md border border-primary/50 text-text hover:bg-primary' // Default for inactive
                 }
                 transition-all duration-200
               `}
@@ -118,6 +119,18 @@ const Skills = () => {
           Next
         </button>
       </div>
+      <div>
+        <h2 className='text-center text-2xl p-4'>TOOLS I USE</h2>
+     <div className='flex flex-row flex-wrap justify-center gap-10'>
+      {tools.map((tool) => (
+        <div className='w-20 h-20' key={tool.name}>
+          <BallCanvas icon={tool.icon} />
+        </div>
+      ))}
+    </div>
+    </div>
+
+
     </section>
   );
 };
