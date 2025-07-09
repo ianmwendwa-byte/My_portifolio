@@ -4,6 +4,7 @@ import SkillsCard from '../components/SkillsCard';
 // and it has the structure: array of objects with skillName, icon, etc.
 import { skills, tools } from '../Constants';
 import BallCanvas from '../components/canvas/Ball';
+import TitleHeader from '../components/TitleHeader';
 
 const Skills = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,7 +58,12 @@ const Skills = () => {
 
   return (
     <section id='skills' className='bg-conic-60 from-primary to-background w-full p-4 min-h-screen '>
-      <h2 className='text-text text-4xl font-bold text-center p-4'>SKILLS AND TOOLS</h2>
+       <div className='mb-2' >
+           <TitleHeader
+           sub={"My arsenals"}
+           title={"SKILLS AND TOOL"}
+           />
+           </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center flex-grow">
         {currentSkills.map((skill, index) => (

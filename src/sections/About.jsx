@@ -1,13 +1,19 @@
 import React from 'react'
 import { services } from '../Constants'
 import Services from '../components/Services'
+import TitleHeader from '../components/TitleHeader'
 
 
 const About = () => {
   return (
     <section id='about' className='bg-conic-120 from-primary  to-background w-full lg:h-screen p-4'>
       <div>
-           <h1 className='font-bold text-center text-4xl  p-4'>ABOUT ME</h1>
+          <div className='mb-2' >
+           <TitleHeader
+           sub={"Know your Developer"}
+           title={"ABOUT ME"}
+           />
+           </div>
            <div className='flex flex-col lg:flex-row gap-6 items-center sm:w-full lg:max-w-4xl mx-auto' > 
             <div className='flex justify-center'>
               <img src='./img/my-profile.webp' alt='my profile' className='rounded-b-full border  object-cover '/>

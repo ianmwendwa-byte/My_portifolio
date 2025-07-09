@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { projects } from '../Constants';
 import ProjectsCard from '../components/ProjectsCard';
+import TitleHeader from '../components/TitleHeader';
 
 
 const Projects = () => {
@@ -61,7 +62,12 @@ const Projects = () => {
   const displayedPageNumbers = getDisplayedPageNumbers();
   return (
     <section id='projects' className='bg-conic-0 from-primary to-background w-full p-4 min-h-screen flex flex-col justify-between'>
-      <h2 className='text-text text-4xl font-bold text-center p-4'>PROJECTS</h2>
+       <div className='mb-2' >
+           <TitleHeader
+           sub={"Selected work"}
+           title={"PROJECTS"}
+           />
+           </div>
 
       {/* Projects Grid */}
       <div className='max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center flex-grow'>
