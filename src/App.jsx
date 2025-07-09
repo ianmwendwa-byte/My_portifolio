@@ -1,8 +1,8 @@
-import { ClassNames } from "@emotion/react"
 import About from "./sections/About"
 import Hero from "./sections/Hero"
 import Skills from "./sections/Skills"
 import Projects from "./sections/Projects"
+import Contact from "./sections/Contact"
 
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
       <About/> 
       <Skills/>
       <Projects/>
+      <Contact/>
      
    
     
