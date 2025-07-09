@@ -60,7 +60,7 @@ const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink
 
       {/* Project Details Modal */}
       {showModal && (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm'>
+        <div className='fixed inset-0 z-50 flex items-center justify-center rounded-2xl bg-black bg-opacity-70 backdrop-blur-sm'>
           <div className='
             bg-white/15 backdrop-blur-lg border border-white/30 shadow-2xl
             rounded-2xl p-6 w-full max-w-2xl h-full 
@@ -75,9 +75,7 @@ const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink
                 &times; {/* Close icon */}
               </button>
             </div>
-            {/* Removed Image, Title, and Technologies from Modal */}
             <p className='text-white text-base mb-4'>{description}</p>
-            {/* Removed Live Site and GitHub Buttons from Modal, as they are on the card */}
           </div>
         </div>
       )}
