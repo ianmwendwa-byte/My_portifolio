@@ -13,11 +13,34 @@ gsap.registerPlugin(SplitText);
 
 const Hero = () => {
 const dotRef = useRef();
+const poleRef = useRef();
 
   // Headline and bouncing scroll animations
   useEffect(() => {
+    // Animate pole sliding from top to bottom
+    if (poleRef.current) {
+      gsap.fromTo(poleRef.current,
+        { y: -300, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 2,
+          ease: 'bounce.inOut'
+        }
+      );
+    }
     // Wait for fonts to be loaded before running SplitText animation
     document.fonts.ready.then(() => {
+      // Animate Navbar
+      gsap.fromTo('.hero-navbar',
+        { y: -60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'circ.inOut'
+        }
+      );
       const headline = SplitText.create(".headline", {
         type: "chars"
       });
@@ -81,7 +104,7 @@ const dotRef = useRef();
     <section id='hero' className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col">
 
       {/* Navbar*/}
-      <Navbar/>
+      <Navbar className="hero-navbar" />
 
       {/* Headline*/}
       <div className="flex justify-center font-orbitron  text-2xl md:text-3xl lg:text-5xl  mt-15 md:my-10 lg:my-20 z-10 line-clamp-none">
@@ -92,12 +115,16 @@ const dotRef = useRef();
         {/* Hero Paragraphs and Buttons */}
         <div className="flex flex-col text-center lg:text-left lg:w-1/2 z-10">
         <div className='flex flex-row items-start gap-5'>
-          <div className='flex flex-col justify-center items-center'>
+          <div className='flex flex-col justify-center items-center opacity-0' ref={poleRef}>
             <div className='w-5 h-5 rounded-full bg-primary' />
-            <div className='w-1 h-24 lg:h-40' style={{
-              background: 'linear-gradient(to bottom, var(--color-primary), var(--color-text))',
-              position: 'relative'
-            }}>
+            <div
+              
+              className='w-1 h-24 lg:h-40'
+              style={{
+                background: 'linear-gradient(to bottom, var(--color-primary), var(--color-text))',
+                position: 'relative'
+              }}
+            >
               <div style={{
                 position: 'absolute',
                 left: '50%',

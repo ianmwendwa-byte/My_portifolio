@@ -3,11 +3,11 @@ import { NAV_LINKS, SITE, SOCIAL_LINKS } from "../Constants";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Navbar = () => {
+const Navbar = ({ className = "" }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className=" text-text fixed right-0 left-0 top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2">
+    <header className={`text-text fixed right-0 left-0 top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2 opacity-0 ${className}`}>
       {/* TOP BAR */}
       <nav className="flex items-center justify-between px-3 py-2 ">
          {/* My name */}

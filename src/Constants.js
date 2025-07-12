@@ -9,8 +9,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 export const NAV_LINKS = [
   { title: "Home", url: "#hero" },
   { title: "About", url: "#about" },
-  { title: "Projects", url: "#projects" },
   { title: "Skills", url: "#skills" },
+  { title: "Projects", url: "#projects" },
   { title: "Contact", url: "#contact" }
 ];
 
