@@ -14,88 +14,121 @@ gsap.registerPlugin(SplitText);
 const Hero = () => {
 const dotRef = useRef();
 const poleRef = useRef();
+const heroModelRef = useRef();
 
   // Headline and bouncing scroll animations
   useEffect(() => {
-    // Animate pole sliding from top to bottom
-    if (poleRef.current) {
-      gsap.fromTo(poleRef.current,
-        { y: -300, opacity: 0 },
+    // Animate background gradient first
+    const bgSection = document.getElementById('hero');
+    if (bgSection) {
+      gsap.fromTo(bgSection,
+        { opacity: 0 },
         {
-          y: 0,
           opacity: 1,
-          duration: 2,
-          ease: 'bounce.inOut'
+          duration: 1.2,
+          ease: 'power2.out',
+          onComplete: () => {
+        // Animate pole sliding from top to bottom
+        if (poleRef.current) {
+          gsap.fromTo(poleRef.current,
+            { y: -300, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 2,
+              ease: 'bounce.inOut'
+            }
+          );
         }
-      );
-    }
-    // Wait for fonts to be loaded before running SplitText animation
-    document.fonts.ready.then(() => {
-      // Animate Navbar
-      gsap.fromTo('.hero-navbar',
-        { y: -60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'circ.inOut'
+        // Animate HeroModel section from right
+        if (heroModelRef.current) {
+          gsap.fromTo(heroModelRef.current,
+            { y: -200, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 3,
+              ease: 'back.inOut'
+            }
+          );
         }
-      );
-      const headline = SplitText.create(".headline", {
-        type: "chars"
-      });
-      gsap.from(headline.chars, {
-        yPercent: "random(-120, 120)",
-        rotation: "random(-360,360)",
-        autoAlpha: 0,
-        stagger: {
-          amount: 0.5,
-          from: "start",
-          ease: "power3.out"
-        }
-      });
+            // Wait for fonts to be loaded before running SplitText animation
+            document.fonts.ready.then(() => {
+              // Animate Navbar
+              gsap.fromTo('.hero-navbar',
+                { y: -60, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 1,
+                  ease: 'circ.inOut'
+                }
+              );
+              // animate headline from random positions
+              const headlineEl = document.querySelector('.headline');
+              if (headlineEl) headlineEl.style.opacity = 1;
+              const headline = SplitText.create(".headline", {
+                type: "chars"
+              });
+              gsap.fromTo(headline.chars,
+                { yPercent: "random(-120, 120)", rotation: "random(-360,360)", autoAlpha: 0 },
+                {
+                  yPercent: 0,
+                  rotation: 0,
+                  autoAlpha: 1,
+                  stagger: {
+                    amount: 0.5,
+                    from: "start",
+                    ease: "power3.out"
+                  }
+                }
+              );
 
-      // Animate hero paragraphs from left
-      gsap.fromTo('.hero-paragraph',
-        { x: -40, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          stagger: 0.15,
-          duration: 1,
-          ease: "power4.inOut"
+              // Animate hero paragraphs from left
+              gsap.fromTo('.hero-paragraph',
+                { x: -40, opacity: 0 },
+                {
+                  x: 0,
+                  opacity: 1,
+                  stagger: 0.15,
+                  duration: 1,
+                  ease: "power4.inOut"
+                }
+              );
+
+              // Animate hero buttons from left
+              gsap.fromTo('.hero-btn',
+                { x: -40, opacity: 0 },
+                {
+                  x: 0,
+                  opacity: 1,
+                  stagger: 0.5,
+                  duration: 1,
+                  ease: "power4.inOut"
+                }
+              );
+            });
+
+            // Bouncing scroll animation
+            if (dotRef.current) {
+              const tl = gsap.timeline({
+                repeat: -1,
+                yoyo: true,
+                defaults: {
+                  duration: 1,
+                  ease: "bounce",
+                }
+              });
+              tl.to(dotRef.current, {
+                y: 24,
+              });
+              return () => {
+                tl.kill();
+              };
+            }
+          }
         }
       );
-
-      // Animate hero buttons from left
-      gsap.fromTo('.hero-btn',
-        { x: -40, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          stagger: 0.5,
-          duration: 1,
-          ease: "power4.inOut"
-        }
-      );
-    });
-
-    // Bouncing scroll animation
-    if (dotRef.current) {
-      const tl = gsap.timeline({
-        repeat: -1,
-        yoyo: true,
-        defaults: {
-          duration: 1,
-          ease: "bounce",
-        }
-      });
-      tl.to(dotRef.current, {
-        y: 24,
-      });
-      return () => {
-        tl.kill();
-      };
     }
   }, []);
 
@@ -108,7 +141,7 @@ const poleRef = useRef();
 
       {/* Headline*/}
       <div className="flex justify-center font-orbitron  text-2xl md:text-3xl lg:text-5xl  mt-15 md:my-10 lg:my-20 z-10 line-clamp-none">
-        <h1 className='headline'>{SITE.description}</h1> 
+        <h1 className='headline opacity-0'>{SITE.description}</h1> 
       </div>
 
       <div className="flex flex-col lg:flex-row lg:justify-between m-8 flex-grow ">
@@ -170,7 +203,10 @@ const poleRef = useRef();
 
         {/* 3D Model Container */}
         <figure>
-          <div className="w-full  lg:w-1/2  h-full min-h-[50vh] absolute bottom-0 top-40 right-0 lg:top-auto">
+          <div
+            ref={heroModelRef}
+            className="w-full  lg:w-1/2  h-full min-h-[50vh] absolute bottom-0 top-40 right-0 lg:top-auto opacity-0"
+          >
             <HeroModel/>
           </div>
         </figure>
