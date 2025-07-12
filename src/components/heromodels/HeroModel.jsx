@@ -1,9 +1,10 @@
-import { useRef, useMemo, Suspense, useState } from 'react';
+import { useRef, useMemo, Suspense, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { useMediaQuery } from 'react-responsive';
 import HeroLights from './HeroLights';
 import Particles from './Particles';
+import CanvasLoader from '../Loader';
 
 
 // Define your tech stack icons data
@@ -129,51 +130,66 @@ const HeroModel = () => {
     orbitControlsMaxDistance = 20;
   }
 
+  // Lazy loading state for orbiting icons
+  const [showOrbitingIcons, setShowOrbitingIcons] = useState(false);
+
+  // Show orbiting icons after a short delay (e.g., 800ms)
+  useEffect(() => {
+    const timer = setTimeout(() => setShowOrbitingIcons(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Canvas camera={{ position: [5, 10, cameraZPosition], fov: cameraFOV }} shadows>
       <ambientLight intensity={1.5} color="#ffffff" />
-      <HeroLights /> {/* Your lighting component */}
-      <Particles />   {/* Your particles component */}
+      <HeroLights />
+      <Particles />
 
       <OrbitControls
         enablePan={false}
-        enableZoom={true} // Enable zoom always, but control min/max distance
-        maxDistance={orbitControlsMaxDistance} // Responsive maxDistance
-        minDistance={orbitControlsMinDistance} // Responsive minDistance
+        enableZoom={true}
+        maxDistance={orbitControlsMaxDistance}
+        minDistance={orbitControlsMinDistance}
         minPolarAngle={Math.PI / 5}
         maxPolarAngle={Math.PI / 2}
       />
 
-      <Suspense fallback={null}> {/* Fallback can be null or a loading indicator */}
-        {/* Central Git icon (not orbiting) */}
+      <Suspense fallback={<CanvasLoader />}>
+        {/* Central Git icon (not orbiting) loads immediately */}
         {techStackIcons.find(icon => !icon.isOrbiting) && (
           <RotatingIcon
             modelPath={techStackIcons.find(icon => !icon.isOrbiting).modelPath}
             scale={techStackIcons.find(icon => !icon.isOrbiting).scale}
-            position={[0, 0, 0]} // Stays at the center
+            position={[0, 0, 0]}
             baseRotationSpeed={techStackIcons.find(icon => !icon.isOrbiting).baseRotationSpeed}
           />
         )}
 
-        {/* Group for the orbiting icons, now wrapped in OrbitingGroupAnimator */}
-        <OrbitingGroupAnimator orbitSpeed={orbitSpeed}>
-          {techStackIcons.filter(icon => icon.isOrbiting).map((icon, index, arr) => {
-            const angle = (index / arr.length) * Math.PI * 2;
-            const x = orbitRadius * Math.sin(angle);
-            const z = orbitRadius * Math.cos(angle);
-            const y = 0;
-
-            return (
-              <RotatingIcon
-                key={index}
-                modelPath={icon.modelPath}
-                scale={icon.scale}
-                position={[x, y, z]}
-                baseRotationSpeed={icon.baseRotationSpeed}
-              />
-            );
-          })}
-        </OrbitingGroupAnimator>
+        {/* Orbiting icons are lazy loaded after delay */}
+        {showOrbitingIcons ? (
+          <OrbitingGroupAnimator orbitSpeed={orbitSpeed}>
+            {techStackIcons.filter(icon => icon.isOrbiting).map((icon, index, arr) => {
+              const angle = (index / arr.length) * Math.PI * 2;
+              const x = orbitRadius * Math.sin(angle);
+              const z = orbitRadius * Math.cos(angle);
+              const y = 0;
+              return (
+                <RotatingIcon
+                  key={index}
+                  modelPath={icon.modelPath}
+                  scale={icon.scale}
+                  position={[x, y, z]}
+                  baseRotationSpeed={icon.baseRotationSpeed}
+                />
+              );
+            })}
+          </OrbitingGroupAnimator>
+        ) : (
+          // Loader for orbiting icons
+          <group position={[0, 0, 0]}>
+            <CanvasLoader />
+          </group>
+        )}
       </Suspense>
     </Canvas>
   );

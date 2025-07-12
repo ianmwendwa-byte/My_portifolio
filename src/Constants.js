@@ -230,7 +230,7 @@ export const tools = [
 // projects
 export const projects = [
   {
-    imageSrc: "/assets/oral-literature-project.png", 
+    imageSrc: "/assets/oral-literature-website.webp", 
     title: "Oral Literature Platform",
     description: "A modern web application designed to showcase and preserve African oral literature. It features a clean, intuitive interface for exploring traditional stories, poems, and folklore from various cultures. The platform is built with a focus on cultural preservation, accessibility, and engaging visual presentation, making rich heritage easily discoverable for a global audience.",
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
