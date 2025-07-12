@@ -40,17 +40,22 @@ const heroModelRef = useRef();
             }
           );
         }
-        // Animate HeroModel section from right
+        // Animate HeroModel section from right (disable on mobile)
+        const isMobile = window.innerWidth < 768;
         if (heroModelRef.current) {
-          gsap.fromTo(heroModelRef.current,
-            { y: -200, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 3,
-              ease: 'back.inOut'
-            }
-          );
+          if (!isMobile) {
+            gsap.fromTo(heroModelRef.current,
+              { y: -200, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 3,
+                ease: 'back.inOut'
+              }
+            );
+          } else {
+            heroModelRef.current.style.display = 'none';
+          }
         }
             // Wait for fonts to be loaded before running SplitText animation
             document.fonts.ready.then(() => {
@@ -205,16 +210,17 @@ const heroModelRef = useRef();
         <figure>
           <div
             ref={heroModelRef}
-            className="w-full  lg:w-1/2  h-full min-h-[50vh] absolute bottom-0 top-40 right-0 lg:top-auto opacity-0"
+            className="w-full lg:w-1/2 h-full min-h-[50vh] absolute bottom-0 top-40 right-0 lg:top-auto opacity-0"
+            style={{ display: window.innerWidth < 768 ? 'none' : undefined }}
           >
-            <HeroModel/>
+            {window.innerWidth >= 768 && <HeroModel/>}
           </div>
         </figure>
       </div>
 
     </div>
     
-      <div className='absolute bottom-1 w-full flex justify-center items-center z-50'>
+      <div className='absolute bottom-1 w-full flex justify-center items-center z-30'>
       <a href='#about'>
         <div className='w-[35px]  h-[64px] rounded-3xl border-2 border-text flex justify-center items-start p-2'>
           <div

@@ -56,8 +56,7 @@ const Navbar = ({ className = "" }) => {
       {/* MOBILE DRAWER */}
       {open && (
         <aside
-          className="fixed inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-none shadow-md 
-            flex flex-col text-center p-6 lg:hidden transition-all duration-300 translate-x-0"
+          className="fixed inset-0 z-50 w-screen h-screen bg-white/10 backdrop-blur-md border border-white/20 rounded-none shadow-md flex flex-col text-center p-6 lg:hidden transition-all duration-300 translate-x-0"
           role="dialog"
           aria-modal="true"
         >
