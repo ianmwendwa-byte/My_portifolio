@@ -147,7 +147,7 @@ const HeroModel = () => {
 
       <OrbitControls
         enablePan={false}
-        enableZoom={true}
+        enableZoom={false}
         maxDistance={orbitControlsMaxDistance}
         minDistance={orbitControlsMinDistance}
         minPolarAngle={Math.PI / 5}

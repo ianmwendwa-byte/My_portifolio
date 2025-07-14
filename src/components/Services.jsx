@@ -9,7 +9,7 @@ const Services = ({ index, title, icon }) => {
     if (cardRef.current) {
       gsap.fromTo(
         cardRef.current,
-        { x: 100, opacity: 0 }, // Start from 100px right and invisible
+        { x: 100, opacity: 0 }, 
         {
           x: 0,
           opacity: 1, 

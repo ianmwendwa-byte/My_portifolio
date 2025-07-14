@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Button from './Button'; 
 
 
-const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink, githubLink }) => {
+const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink, githubLink, index = 0 }) => {
   const [showModal, setShowModal] = useState(false);
   const maxDescriptionLength = 100; 
+  const projectsCardRef = useRef();
+
+  useEffect(() => {
+    if (projectsCardRef.current) {
+      import('gsap').then(gsapModule => {
+        const gsap = gsapModule.default;
+        gsap.fromTo(
+          projectsCardRef.current,
+          { x: 100, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'back.out(1.7)',
+            delay: index * 0.5,
+          }
+        );
+      });
+    }
+    return () => {
+      if (projectsCardRef.current) {
+        import('gsap').then(gsapModule => {
+          const gsap = gsapModule.default;
+          gsap.killTweensOf(projectsCardRef.current);
+        });
+      }
+    };
+  }, [index]);
 
   const truncatedDescription = description.length > maxDescriptionLength
     ? description.substring(0, maxDescriptionLength) + '...'
@@ -17,7 +45,7 @@ const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink
     <div className='
       bg-white/10 backdrop-blur-md border border-white/20 shadow-lg
       rounded-2xl h-auto w-80 flex flex-col p-4 items-center justify-between
-    '>
+    ' ref={projectsCardRef}>
       {/* Image */}
       <div className='w-full h-48 rounded-lg overflow-hidden mb-4'>
         <img

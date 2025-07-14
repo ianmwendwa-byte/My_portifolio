@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
-const SkillsCard = ({ skillName, icon, progressPercentage, experienceLevel, yearsOfExperience }) => {
+const SkillsCard = ({ skillName, icon, progressPercentage, experienceLevel, yearsOfExperience, index = 0, className }) => {
+  const cardRef = useRef();
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
 
   const strokeDashoffset = circumference - (progressPercentage / 100) * circumference;
 
   return (
-    <div className='
-      bg-white/10 backdrop-blur-md border border-white/20 shadow-lg
-      rounded-2xl h-60 w-60 flex flex-col p-2 items-center justify-between
-    '>
+    <div ref={cardRef} className={`skills-card bg-white/10 backdrop-blur-md border border-white/20 shadow-lg rounded-2xl h-60 w-60 flex flex-col p-2 items-center justify-between ${className || ''}`}>
       <div>
         <h1 className='text-text text-xl  mb-4 text-center'>{skillName}</h1> 
         <div className='relative w-32 h-32'>

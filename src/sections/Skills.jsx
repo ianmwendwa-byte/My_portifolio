@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(SplitText, ScrollTrigger);
 import SkillsCard from '../components/SkillsCard';
-// Assuming 'skills' from '../Constants' is the correct data source
-// and it has the structure: array of objects with skillName, icon, etc.
 import { skills, tools } from '../Constants';
 import BallCanvas from '../components/canvas/Ball';
 import TitleHeader from '../components/TitleHeader';
 
 const Skills = () => {
+  const sectionRef = useRef();
+  const headlineRef = useRef();
+  const toolsHeadlineRef = useRef();
+  const paginationRef = useRef();
+  const gradientProps = useRef({ angle: 120 });
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 4;
 
@@ -56,17 +63,135 @@ const Skills = () => {
 
   const displayedPageNumbers = getDisplayedPageNumbers();
 
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    // Animate gradient background on scroll
+    const updateGradient = () => {
+      sectionRef.current.style.backgroundImage = `conic-gradient(from ${gradientProps.current.angle}deg at center, var(--color-primary), var(--color-background))`;
+    };
+    // Set initial gradient
+    updateGradient();
+    let splitHeadline = null;
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top center',
+      onEnter: () => {
+        // Animate gradient angle
+        gsap.to(gradientProps.current, {
+          angle: 60,
+          duration: 1.2,
+          ease: 'power2.out',
+          onUpdate: updateGradient
+        });
+        // Animate headline
+        if (headlineRef.current) {
+          if (splitHeadline) splitHeadline.revert();
+          splitHeadline = SplitText.create(headlineRef.current, { type: 'chars' });
+          gsap.fromTo(splitHeadline.chars,
+            { yPercent: "random(-120, 120)", rotation: "random(-360,360)", autoAlpha: 0 },
+            {
+              yPercent: 0,
+              rotation: 0,
+              autoAlpha: 1,
+              stagger: { amount: 0.5, from: "start", ease: "power3.out" }
+            }
+          );
+        }
+        // Animate skill cards from right
+        gsap.fromTo('.skills-card',
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 1,
+            ease: 'power4.inOut',
+            delay: 0.5
+          }
+        );
+        // Animate tool icons
+        gsap.fromTo('.tool-ball',
+          { scale: 0.7, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.1,
+            ease: 'power2.out',
+            delay: 0.5
+          }
+        );
+        // Animate tools headline
+        if (toolsHeadlineRef.current) {
+          gsap.fromTo(toolsHeadlineRef.current,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: 'power2.out', delay: 0.7 }
+          );
+        }
+        // Animate pagination controls
+        if (paginationRef.current) {
+          gsap.fromTo(paginationRef.current,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: 'power2.out', delay: 0.8 }
+          );
+        }
+      },
+      onLeaveBack: () => {
+
+        gsap.to(gradientProps.current, {
+          angle: 120,
+          duration: 1.2,
+          ease: 'power2.out',
+          onUpdate: updateGradient
+        });
+        // Revert headline
+        if (splitHeadline) {
+          splitHeadline.revert();
+          splitHeadline = null;
+        }
+        // Hide skill cards
+        gsap.to('.skills-card', {
+          opacity: 0,
+          y: 40,
+          duration: 0.5,
+          overwrite: 'auto'
+        });
+        // Hide tool icons
+        gsap.to('.tool-ball', {
+          scale: 0.7,
+          opacity: 0,
+          duration: 0.5,
+          overwrite: 'auto'
+        });
+        // Hide tools headline
+        if (toolsHeadlineRef.current) {
+          gsap.to(toolsHeadlineRef.current,
+            { y: 40, opacity: 0, duration: 0.5, ease: 'power2.inOut' }
+          );
+        }
+        // Hide pagination controls
+        if (paginationRef.current) {
+          gsap.to(paginationRef.current,
+            { y: 40, opacity: 0, duration: 0.5, ease: 'power2.inOut' }
+          );
+        }
+      }
+    });
+  }, []);
+
   return (
-    <section id='skills' className='bg-conic-60 from-primary to-background w-full p-4 min-h-screen '>
-       <div className='mb-2' >
-           <TitleHeader
-           sub={"My arsenals"}
-           title={"SKILLS AND TOOL"}
-           />
-           </div>
+    <section id='skills' className='bg-conic-60 from-primary to-background w-full p-4 min-h-screen ' ref={sectionRef}>
+      <div className='mb-2'>
+        <TitleHeader
+          sub={"My arsenals"}
+          title={"SKILLS AND TOOL"}
+          headlineRef={headlineRef}
+        />
+      </div>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center flex-grow">
         {currentSkills.map((skill, index) => (
+
           <SkillsCard
             key={index}
             skillName={skill.skillName}
@@ -74,12 +199,13 @@ const Skills = () => {
             progressPercentage={skill.progressPercentage}
             experienceLevel={skill.experienceLevel}
             yearsOfExperience={skill.yearsOfExperience}
+            className="skills-card"
           />
         ))}
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center items-center mt-8 space-x-4 ">
+      <div className="flex justify-center items-center mt-8 space-x-4 " ref={paginationRef}>
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
@@ -126,17 +252,15 @@ const Skills = () => {
         </button>
       </div>
       <div>
-        <h2 className='text-center text-2xl p-4'>TOOLS I USE</h2>
-     <div className='flex flex-row flex-wrap justify-center gap-10'>
-      {tools.map((tool) => (
-        <div className='w-20 h-20' key={tool.name}>
-          <BallCanvas icon={tool.icon} />
+        <h2 ref={toolsHeadlineRef} className='text-center text-2xl p-4'>TOOLS I USE</h2>
+        <div className='flex flex-row flex-wrap justify-center gap-10'>
+          {tools.map((tool) => (
+            <div className='w-20 h-20 tool-ball' key={tool.name}>
+              <BallCanvas icon={tool.icon} />
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-    </div>
-
-
+      </div>
     </section>
   );
 };

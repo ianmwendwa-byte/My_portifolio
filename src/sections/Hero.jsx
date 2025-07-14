@@ -8,8 +8,9 @@ import DownloadIcon from '@mui/icons-material/Download';
 import WorkIcon from '@mui/icons-material/Work';
 import CallIcon from '@mui/icons-material/Call';
 import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const Hero = () => {
 const dotRef = useRef();
@@ -147,15 +148,51 @@ const heroRef = useRef();
           }
         }
       );
+
+      // Animate gradient angle and wipe hero contents on scroll to about section
+      ScrollTrigger.create({
+        trigger: '#about',
+        start: 'top center',
+        onEnter: () => {
+          // Wipe hero contents as gradient rotates
+          gsap.to(gradientProps, {
+            angle: 120,
+            duration: 1.2,
+            ease: 'power2.out',
+            onUpdate: updateGradient
+          });
+          // Fancy exit: fade out, scale down, blur, and rotate hero contents
+          gsap.to(heroRef.current.children, {
+            opacity: 0,
+            duration: 2,
+            stagger: 0.12,
+            ease: 'power4.inOut'
+          });
+        
+        },
+        onLeaveBack: () => {
+          // Animate gradient back
+          gsap.to(gradientProps, {
+            angle: 180,
+            duration: 1.2,
+            ease: 'power2.out',
+            onUpdate: updateGradient
+          });
+          // Fancy entrance: fade in, scale up, unblur, and rotate back hero contents
+          gsap.to(heroRef.current.children, {
+            opacity: 1,
+            duration: 2,
+            stagger: 0.12,
+            ease: 'power4.inOut'
+          });
+        }
+      });
     }
   }, []);
 
 
   return (
     <section id='hero' className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col" ref={heroRef}>
-
-      {/* Navbar*/}
-      <Navbar className="hero-navbar" />
 
       {/* Headline*/}
       <div className="flex justify-center font-orbitron  text-2xl md:text-3xl lg:text-5xl  mt-15 md:my-10 lg:my-20 z-10 line-clamp-none">
