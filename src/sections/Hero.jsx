@@ -15,19 +15,33 @@ const Hero = () => {
 const dotRef = useRef();
 const poleRef = useRef();
 const heroModelRef = useRef();
+const heroRef = useRef();
 
-  // Headline and bouncing scroll animations
+ 
   useEffect(() => {
-    // Animate background gradient first
-    const bgSection = document.getElementById('hero');
-    if (bgSection) {
-      gsap.fromTo(bgSection,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 1.2,
-          ease: 'power2.out',
-          onComplete: () => {
+    // Animate background gradient rotation from 540deg to 180deg on load
+    if (heroRef.current) {
+      // Set initial gradient before animation
+      const initialAngle = 540;
+      const fromColor = getComputedStyle(document.documentElement).getPropertyValue('--color-background').trim() || '#000000';
+      const toColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#3A5E1B';
+      heroRef.current.style.backgroundImage = `conic-gradient(from ${initialAngle}deg at center, ${fromColor}, ${toColor})`;
+
+      // Animate gradient
+      const gradientProps = {
+        angle: initialAngle,
+        fromColor,
+        toColor
+      };
+      const updateGradient = () => {
+        heroRef.current.style.backgroundImage = `conic-gradient(from ${gradientProps.angle}deg at center, ${fromColor}, ${toColor})`;
+      };
+      gsap.to(gradientProps, {
+        angle: 180, // Animate to 180deg
+        duration: 2,
+        ease: 'power2.out',
+        onUpdate: updateGradient,
+        onComplete: () => {
         // Animate pole sliding from top to bottom
         if (poleRef.current) {
           gsap.fromTo(poleRef.current,
@@ -114,8 +128,10 @@ const heroModelRef = useRef();
               );
             });
 
-            // Bouncing scroll animation
+            // Fade in dotRef container
             if (dotRef.current) {
+              gsap.to(dotRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+              // Bouncing scroll animation
               const tl = gsap.timeline({
                 repeat: -1,
                 yoyo: true,
@@ -124,12 +140,9 @@ const heroModelRef = useRef();
                   ease: "bounce",
                 }
               });
-              tl.to(dotRef.current, {
+              tl.to(dotRef.current.querySelector('.w-3'), {
                 y: 24,
               });
-              return () => {
-                tl.kill();
-              };
             }
           }
         }
@@ -139,7 +152,7 @@ const heroModelRef = useRef();
 
 
   return (
-    <section id='hero' className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col">
+    <section id='hero' className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col" ref={heroRef}>
 
       {/* Navbar*/}
       <Navbar className="hero-navbar" />
@@ -190,18 +203,19 @@ const heroModelRef = useRef();
         {/* Buttons Div */}
         <div className="mt-4 lg:mt-10 flex justify-center gap-4 w-full lg:justify-between lg:pr-4">
           <Button
-            text={"Download Resume"}
+            text={"My Resume"}
             Icon={DownloadIcon}
             className="hero-btn opacity-0"
           />
           <Button
-            text={"My Work"}
+            text={"Projects"}
             Icon={WorkIcon}
             className="hero-btn opacity-0"
           />
           <Button
-            text={"Contact Me"}
+            text={"Hire Me"}
             Icon={CallIcon}
+            link={"#contact"}
             className="hero-btn opacity-0"
           />
         </div>
@@ -220,16 +234,15 @@ const heroModelRef = useRef();
 
     </div>
     
-      <div className='absolute bottom-1 w-full flex justify-center items-center z-30'>
-      <a href='#about'>
-        <div className='w-[35px]  h-[64px] rounded-3xl border-2 border-text flex justify-center items-start p-2'>
-          <div
-            ref={dotRef}
-            className='w-3 h-3 rounded-full bg-text mb-1'
-          />
-        </div>
-      </a>
-    </div>
+      <div className='absolute bottom-1 w-full flex justify-center items-center z-30' style={{opacity: 0}} ref={dotRef}>
+        <a href='#about'>
+          <div className='w-[35px]  h-[64px] rounded-3xl border-2 border-text flex justify-center items-start p-2'>
+            <div
+              className='w-3 h-3 rounded-full bg-text mb-1'
+            />
+          </div>
+        </a>
+      </div>
 
     </section>
   );

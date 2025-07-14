@@ -7,7 +7,7 @@ const Navbar = ({ className = "" }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className={`text-text fixed right-0 left-0 top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2 opacity-0 ${className}`}>
+    <header className={`text-text fixed right-0 left-0 top-0 lg:top-2 z-50 font-roboto lg:backdrop-blur-md lg:bg-white/10 lg:border lg:border-white/20 lg:rounded-3xl lg:shadow-lg lg:mx-2  opacity-0 ${className}`}>
       {/* TOP BAR */}
       <nav className="flex items-center justify-between px-3 py-2 ">
          {/* My name */}
@@ -56,19 +56,20 @@ const Navbar = ({ className = "" }) => {
       {/* MOBILE DRAWER */}
       {open && (
         <aside
-          className="fixed inset-0 z-50 w-screen h-screen bg-white/10 backdrop-blur-md border border-white/20 rounded-none shadow-md flex flex-col text-center p-6 lg:hidden transition-all duration-300 translate-x-0"
+          className="fixed inset-0 z-50 w-screen h-svh  bg-white/10 backdrop-blur-md border border-white/20 rounded-none shadow-md flex flex-col  text-center  lg:hidden transition-all duration-300 translate-x-0 "
           role="dialog"
           aria-modal="true"
         >
+          
           {/* Close btn */}
           <button
             onClick={() => setOpen(false)}
-            className="self-end  mb-8 focus:outline-none"
+            className="self-end  mb-2 focus:outline-none"
             aria-label="Close menu"
           >
             <CloseIcon fontSize="large" />
           </button>
-
+        
           {/* Nav links */}
           <ul className="flex flex-col gap-6 text-lg">
             {NAV_LINKS.map(({ url, title }, i) => (
@@ -76,23 +77,23 @@ const Navbar = ({ className = "" }) => {
                 <a
                   href={url}
                   onClick={() => setOpen(false)}
-                  className="hover:text-secondary transition-colors duration-200"
+                  className="hover:text-secondary transition-colors duration-300"
                 >
                   {title}
                 </a>
               </li>
             ))}
           </ul>
-
+        
           {/* Social links */}
-          <ul className="flex gap-6 justify-center mt-auto">
+          <ul className="flex gap-6 justify-center mt-auto pb-5">
             {SOCIAL_LINKS.map(({ url, icon: Icon }, i) => (
               <li key={i}>
                 <a
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-secondary transition-colors duration-200"
+                  className="hover:text-secondary transition-colors duration-300"
                 >
                   <Icon className="w-6 h-6" />
                 </a>
