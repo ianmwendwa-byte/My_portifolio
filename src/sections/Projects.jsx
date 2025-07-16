@@ -1,76 +1,152 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects } from '../Constants';
 import ProjectsCard from '../components/ProjectsCard';
 import TitleHeader from '../components/TitleHeader';
 
-
+ gsap.registerPlugin(SplitText, ScrollTrigger);
 const Projects = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 3; // Changed to display 3 cards per page
-
+  const cardsPerPage = 3;
   const totalPages = Math.ceil(projects.length / cardsPerPage);
-
-  // Calculate the projects to display on the current page
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentProjects = projects.slice(indexOfFirstCard, indexOfLastCard);
+  const sectionRef = useRef();
+  const headlineRef = useRef();
+  const paginationRef = useRef();
+  const gradientProps = useRef({ angle: 60 });
 
-  // Function to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Handle next and previous page
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
-
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
-
   // Optimized Logic to determine which page numbers to display (max 3 visible)
   const getDisplayedPageNumbers = () => {
     const displayed = [];
     const maxVisible = 3;
-
     if (totalPages <= maxVisible) {
-      // If total pages are 3 or less, show all of them
       for (let i = 1; i <= totalPages; i++) {
         displayed.push(i);
       }
     } else {
-      // Calculate start and end pages for the sliding window
       let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
       let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-
-      // Adjust startPage if hitting the end boundary
       if (endPage === totalPages) {
         startPage = Math.max(1, totalPages - maxVisible + 1);
       }
-      
-      // Populate the displayed array
       for (let i = startPage; i <= endPage; i++) {
         displayed.push(i);
       }
     }
     return displayed;
   };
-
   const displayedPageNumbers = getDisplayedPageNumbers();
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    // Animate gradient background on scroll
+    const updateGradient = () => {
+      sectionRef.current.style.backgroundImage = `conic-gradient(from ${gradientProps.current.angle}deg at center, var(--color-primary), var(--color-background))`;
+    };
+    updateGradient();
+    let splitHeadline = null;
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top center',
+      onEnter: () => {
+        gsap.to(gradientProps.current, {
+          angle: 0,
+          duration: 2,
+          ease: 'power2.out',
+          onUpdate: updateGradient,
+          onComplete: () => {
+            // Animate headline
+            if (headlineRef.current) {
+              if (splitHeadline) splitHeadline.revert();
+              splitHeadline = SplitText.create(headlineRef.current, { type: 'chars' });
+              gsap.fromTo(splitHeadline.chars,
+                { yPercent: "random(-120, 120)", rotation: "random(-360,360)", autoAlpha: 0 },
+                {
+                  yPercent: 0,
+                  rotation: 0,
+                  autoAlpha: 1,
+                  stagger: { amount: 0.5, from: "start", ease: "power3.out" }
+                }
+              );
+            }
+            // Animate project cards
+            gsap.fromTo('.projects-card',
+              { y: 40, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                stagger: 0.15,
+                duration: 2,
+                ease: 'power4.inOut',
+                delay: 0.2
+              }
+            );
+            // Animate pagination controls
+            if (paginationRef.current) {
+              gsap.fromTo(paginationRef.current,
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: 'power2.out', delay: 0.5 }
+              );
+            }
+          }
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to(gradientProps.current, {
+          angle: 60,
+          duration: 1.2,
+          ease: 'power2.out',
+          onUpdate: updateGradient
+        });
+        // Revert headline
+        if (splitHeadline) {
+          splitHeadline.revert();
+          splitHeadline = null;
+        }
+        // Hide project cards
+        gsap.to('.projects-card', {
+          opacity: 0,
+          y: 40,
+          duration: 0.5,
+          overwrite: 'auto'
+        });
+        // Hide pagination controls
+        if (paginationRef.current) {
+          gsap.to(paginationRef.current,
+            { y: 40, opacity: 0, duration: 0.5, ease: 'power2.inOut' }
+          );
+        }
+      }
+    });
+  }, []);
+
   return (
-    <section id='projects' className='bg-conic-0 from-primary to-background w-full p-4 min-h-screen flex flex-col justify-between'>
-       <div className='mb-2' >
-           <TitleHeader
-           sub={"Selected work"}
-           title={"PROJECTS"}
-           />
-           </div>
+    <section id='projects' className='bg-conic-0 from-primary to-background w-full p-4 min-h-screen flex flex-col justify-between' ref={sectionRef}>
+      <div className='mb-2'>
+        <TitleHeader
+          sub={"Selected work"}
+          title={"PROJECTS"}
+          headlineRef={headlineRef}
+        />
+      </div>
 
       {/* Projects Grid */}
-      <div className='max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center flex-grow'>
+      <div className='max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center flex-grow projects-card'>
         {currentProjects.map((project, index) => (
           <ProjectsCard
             key={index}
@@ -85,7 +161,7 @@ const Projects = () => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center items-center mt-8 space-x-4">
+      <div className="flex justify-center items-center mt-8 space-x-4" ref={paginationRef}>
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}

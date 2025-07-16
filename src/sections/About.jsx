@@ -29,7 +29,7 @@ const About = () => {
         onEnter: () => {
           gsap.to(gradientProps.current, {
             angle: 120,
-            duration: 1.2,
+            duration:2,
             ease: 'power2.out',
             onUpdate: updateGradient
           });

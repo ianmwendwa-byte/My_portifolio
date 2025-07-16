@@ -79,7 +79,7 @@ const Skills = () => {
         // Animate gradient angle
         gsap.to(gradientProps.current, {
           angle: 60,
-          duration: 1.2,
+          duration: 2,
           ease: 'power2.out',
           onUpdate: updateGradient
         });
