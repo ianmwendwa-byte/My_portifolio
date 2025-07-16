@@ -44,7 +44,7 @@ const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink
   return (
     <div className='
       bg-white/10 backdrop-blur-md border border-white/20 shadow-lg
-      rounded-2xl h-auto w-80 flex flex-col p-4 items-center justify-between
+      rounded-2xl h-auto w-80 flex flex-col p-2 items-center justify-between
     ' ref={projectsCardRef}>
       {/* Image */}
       <div className='w-full h-48 rounded-lg overflow-hidden mb-4'>
@@ -72,11 +72,22 @@ const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink
         </p>
         
         <div className='flex flex-wrap justify-center gap-2 mb-4'>
-          {technologies.map((tech, index) => (
-            <span key={index} className='bg-primary/20 text-white text-xs font-semibold px-2 py-1 rounded-full'>
-              {tech}
-            </span>
-          ))}
+          {(() => {
+            const techBgColors = [
+              "bg-background/20",
+              "bg-green-500/20",
+              "bg-blue-500/20",
+              "bg-yellow-500/20"
+            ];
+            return technologies.map((tech, index) => (
+              <span
+                key={index}
+                className={`${techBgColors[index % techBgColors.length]} text-white text-xs font-semibold px-2 py-1 rounded-full`}
+              >
+                {tech}
+              </span>
+            ));
+          })()}
         </div>
       </div>
 

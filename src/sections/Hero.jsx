@@ -248,6 +248,7 @@ const heroRef = useRef();
             text={"Projects"}
             Icon={WorkIcon}
             className="hero-btn opacity-0"
+            link={"#projects"}
           />
           <Button
             text={"Hire Me"}

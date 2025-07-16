@@ -238,7 +238,7 @@ export const projects = [
     githubLink: "https://github.com/yourusername/oral-literature-repo" 
   },
   {
-    imageSrc: "/assets/e-commerce-dashboard.png",
+    imageSrc: "/assets/oral-literature-website.webp",
     title: "E-commerce Admin Dashboard",
     description: "A comprehensive administrative dashboard for managing an e-commerce platform. This robust system allows for product management, order tracking, user administration, and sales analytics. It provides a centralized, user-friendly interface for store owners to efficiently oversee their online business operations and make data-driven decisions.",
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Redux"],
@@ -246,7 +246,7 @@ export const projects = [
     githubLink: "https://github.com/yourusername/ecommerce-dashboard-repo"
   },
   {
-    imageSrc: "/assets/task-manager-app.png",
+    imageSrc: "/assets/oral-literature-website.webp",
     title: "Collaborative Task Manager",
     description: "A real-time, collaborative task management application designed for teams. Users can create, assign, and track tasks, set deadlines, and receive notifications. Features include drag-and-drop task reordering, user authentication, and real-time updates across all connected clients, fostering efficient teamwork and project completion.",
     technologies: ["React", "Firebase", "Zustand", "GSAP", "CSS"],
@@ -262,7 +262,7 @@ export const projects = [
     githubLink: "https://github.com/yourusername/your-portfolio-repo"
   },
   {
-    imageSrc: "/assets/weather-app.png",
+    imageSrc: "/assets/oral-literature-website.webp",
     title: "Modern Weather App",
     description: "A sleek and responsive weather application providing real-time weather data, forecasts, and interactive maps. Users can search for locations worldwide and get detailed information including temperature, humidity, wind speed, and precipitation. The app features a clean design and leverages a third-party weather API for accurate data.",
     technologies: ["React", "API Integration", "CSS Modules"],

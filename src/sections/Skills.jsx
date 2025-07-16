@@ -189,7 +189,7 @@ const Skills = () => {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center flex-grow">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center flex-grow mt-8">
         {currentSkills.map((skill, index) => (
 
           <SkillsCard
