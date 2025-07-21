@@ -14,7 +14,7 @@ const Button = ({ link, text, Icon, className = '', external = false }) => {
         shadow-lg hover:bg-primary 
         transition-all duration-300 ease-in-out
         transform hover:scale-105
-        focus:outline-none focus:ring-2 focus:ring-background focus:ring-opacity-75
+        focus:outline-none focus:ring-2 focus:ring-background focus:ring-opacity-75 
         ${className}
       `}
     >

@@ -201,10 +201,10 @@ const heroRef = useRef();
         <div className="flex flex-col text-wrap lg:text-left lg:w-1/2 z-10">
         <div className='flex flex-row items-start gap-3 md:gap-5'>
           <div className='flex flex-col justify-center items-center opacity-0' ref={poleRef}>
-            <div className='w-5 h-5 rounded-full bg-primary' />
+            <div className='w-1 h-1 rounded-full bg-primary' />
             <div
               
-              className='w-1 h-30 lg:h-40'
+              className='w-0.5 h-30 lg:h-40'
               style={{
                 background: 'linear-gradient(to bottom, var(--color-primary), var(--color-text))',
                 position: 'relative'
