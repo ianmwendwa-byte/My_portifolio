@@ -4,35 +4,8 @@ import Button from './Button';
 
 const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink, githubLink, index = 0 }) => {
   const [showModal, setShowModal] = useState(false);
-  const maxDescriptionLength = 100; 
+  const maxDescriptionLength = 100;
   const projectsCardRef = useRef();
-
-  useEffect(() => {
-    if (projectsCardRef.current) {
-      import('gsap').then(gsapModule => {
-        const gsap = gsapModule.default;
-        gsap.fromTo(
-          projectsCardRef.current,
-          { x: 100, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'back.out(1.7)',
-            delay: index * 0.5,
-          }
-        );
-      });
-    }
-    return () => {
-      if (projectsCardRef.current) {
-        import('gsap').then(gsapModule => {
-          const gsap = gsapModule.default;
-          gsap.killTweensOf(projectsCardRef.current);
-        });
-      }
-    };
-  }, [index]);
 
   const truncatedDescription = description.length > maxDescriptionLength
     ? description.substring(0, maxDescriptionLength) + '...'

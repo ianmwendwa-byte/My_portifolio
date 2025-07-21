@@ -64,7 +64,7 @@ const Navbar = ({ className = "" }) => {
           {/* Close btn */}
           <button
             onClick={() => setOpen(false)}
-            className="self-end  mb-2 focus:outline-none"
+            className="self-end  mb-2 mr-3 focus:outline-none"
             aria-label="Close menu"
           >
             <CloseIcon fontSize="large" />

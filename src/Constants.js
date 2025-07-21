@@ -120,12 +120,13 @@ export const skills = [
     yearsOfExperience: "2 YEARS"
   },
   {
-    skillName: "TypeScript",
-    icon: "/assets/typescript.png", 
-    progressPercentage: 80,
-    experienceLevel: "INTERMEDIATE",
-    yearsOfExperience: "1 YEAR"
+    skillName: "TAILWIND CSS",
+    icon: "/assets/tailwind.png", 
+    progressPercentage: 98,
+    experienceLevel: "EXPERT",
+    yearsOfExperience: "2+ YEARS"
   },
+
   {
     skillName: "CSS",
     icon: "/assets/css.png", 
@@ -133,7 +134,7 @@ export const skills = [
     experienceLevel: "EXPERT",
     yearsOfExperience: "4+ YEARS"
   },
-  {
+   {
     skillName: "SQL",
     icon: "/assets/my-sql.png", 
     progressPercentage: 90,
@@ -169,13 +170,12 @@ export const skills = [
     yearsOfExperience: "1+ YEARS"
   },
   {
-    skillName: "TAILWIND CSS",
-    icon: "/assets/tailwind.png", 
-    progressPercentage: 98,
-    experienceLevel: "EXPERT",
-    yearsOfExperience: "2+ YEARS"
+    skillName: "TypeScript",
+    icon: "/assets/typescript.png", 
+    progressPercentage: 80,
+    experienceLevel: "INTERMEDIATE",
+    yearsOfExperience: "1 YEAR"
   },
-  
   {
     skillName: "REDUX",
     icon: "/assets/redux.png", 
