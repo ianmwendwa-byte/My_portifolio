@@ -2,8 +2,7 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap'; 
 import Button from "../components/Button";
 import HeroModel from "../components/heromodels/HeroModel";
-import Navbar from "../components/Navbar";
-import { HEROS, SITE } from "../Constants";
+import { HEROS, MobileHero, SITE } from "../Constants";
 import DownloadIcon from '@mui/icons-material/Download';
 import WorkIcon from '@mui/icons-material/Work';
 import CallIcon from '@mui/icons-material/Call';
@@ -55,22 +54,17 @@ const heroRef = useRef();
             }
           );
         }
-        // Animate HeroModel section from right (disable on mobile)
-        const isMobile = window.innerWidth < 768;
+        
+        
         if (heroModelRef.current) {
-          if (!isMobile) {
             gsap.fromTo(heroModelRef.current,
-              { y: -200, opacity: 0 },
+              {  opacity: 0 },
               {
-                y: 0,
                 opacity: 1,
-                duration: 3,
-                ease: 'back.inOut'
+                duration: 1,
+                ease: 'power2.out'
               }
             );
-          } else {
-            heroModelRef.current.style.display = 'none';
-          }
         }
             // Wait for fonts to be loaded before running SplitText animation
             document.fonts.ready.then(() => {
@@ -192,22 +186,22 @@ const heroRef = useRef();
 
 
   return (
-    <section id='hero' className="bg-conic-180 from-background to-primary text-text relative min-h-screen flex flex-col" ref={heroRef}>
+    <section id='hero' className="bg-conic-180 from-background to-primary text-text relative h-svh lg:min-h-screen flex flex-col" ref={heroRef}>
 
       {/* Headline*/}
-      <div className="flex justify-center font-orbitron  text-2xl md:text-3xl lg:text-5xl  mt-15 md:my-10 lg:my-20 z-10 line-clamp-none">
+      <div className="flex justify-center font-orbitron  text-3xl lg:text-5xl  mt-30 md:my-10 lg:my-20 z-10 line-clamp-none">
         <h1 className='headline opacity-0'>{SITE.description}</h1> 
       </div>
 
       <div className="flex flex-col lg:flex-row lg:justify-between m-8 flex-grow ">
         {/* Hero Paragraphs and Buttons */}
-        <div className="flex flex-col text-center lg:text-left lg:w-1/2 z-10">
-        <div className='flex flex-row items-start gap-5'>
+        <div className="flex flex-col text-wrap lg:text-left lg:w-1/2 z-10">
+        <div className='flex flex-row items-start gap-3 md:gap-5'>
           <div className='flex flex-col justify-center items-center opacity-0' ref={poleRef}>
             <div className='w-5 h-5 rounded-full bg-primary' />
             <div
               
-              className='w-1 h-24 lg:h-40'
+              className='w-1 h-30 lg:h-40'
               style={{
                 background: 'linear-gradient(to bottom, var(--color-primary), var(--color-text))',
                 position: 'relative'
@@ -227,22 +221,41 @@ const heroRef = useRef();
             </div>
           </div>
           <div>
-            {HEROS.map((Hero, index) => (
-              <p
-                key={index}
-                className="font-roboto text-base sm:text-lg md:text-xl lg:text-2xl text-white text-balance pb-3 hero-paragraph opacity-0"
-              >
-                {Hero.content}
-              </p>
-            ))}
-          </div>
+  {/* Mobile and tablets */}
+
+  <div>
+    {/* Mobile only */}
+    <div className="block sm:hidden">
+      {MobileHero.map((Hero, index) => (
+        <p
+          key={index}
+          className="font-roboto text-base text-text text-balance pb-3 hero-paragraph opacity-0"
+        >
+          {Hero.content}
+        </p>
+      ))}
+    </div>
+    {/* Tablet and up */}
+    <div className="hidden sm:block">
+      {HEROS.map((Hero, index) => (
+        <p
+          key={index}
+          className="font-roboto text-lg md:text-xl lg:text-2xl text-text text-balance pb-3 hero-paragraph opacity-0"
+        >
+          {Hero.content}
+        </p>
+      ))}
+    </div>
+  </div>
+</div>
         </div>
         {/* Buttons Div */}
-        <div className="mt-4 lg:mt-10 flex justify-center gap-4 w-full lg:justify-between lg:pr-4">
+        <div className="mt-4 lg:mt-10 flex justify-center gap-4 w-full lg:justify-between lg:pr-4 z-30">
           <Button
             text={"My Resume"}
             Icon={DownloadIcon}
             className="hero-btn opacity-0"
+            link={"/assets/ian-mwendwa.pdf"}
           />
           <Button
             text={"Projects"}
@@ -263,16 +276,15 @@ const heroRef = useRef();
           <div
             ref={heroModelRef}
             className="w-full lg:w-1/2 h-full min-h-[50vh] absolute bottom-0 top-40 right-0 lg:top-auto opacity-0"
-            style={{ display: window.innerWidth < 768 ? 'none' : undefined }}
           >
-            {window.innerWidth >= 768 && <HeroModel/>}
+           <HeroModel/>
           </div>
         </figure>
       </div>
 
     </div>
     
-      <div className='absolute bottom-1 w-full flex justify-center items-center z-30' style={{opacity: 0}} ref={dotRef}>
+      <div className='absolute bottom-1 w-full flex justify-center items-center z-30 opacity-0'  ref={dotRef}>
         <a href='#about'>
           <div className='w-[35px]  h-[64px] rounded-3xl border-2 border-text flex justify-center items-start p-2'>
             <div

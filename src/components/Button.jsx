@@ -1,10 +1,12 @@
 
 const Button = ({ link, text, Icon, className = '', external = false }) => {
+  const isPdf = link && link.endsWith('.pdf');
   return (
     <a
       href={link}
       target={external ? "_blank" : "_self"} 
       rel={external ? "noopener noreferrer" : undefined} 
+       download={isPdf ? true : undefined}
       className={`
         inline-flex items-center justify-center
         px-3 py-3 rounded-lg

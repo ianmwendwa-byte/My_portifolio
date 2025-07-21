@@ -107,9 +107,14 @@ const About = () => {
         </div>
         <div className='flex flex-col lg:flex-row gap-6 items-center sm:w-full lg:max-w-4xl mx-auto' > 
           <div className='flex justify-center'>
-            <img ref={imgRef} src='./img/my-profile.webp' alt='my profile' className='rounded-b-full border object-cover'/>
+            <img
+              ref={imgRef}
+              src='./img/my-profile.webp'
+              alt='my profile'
+              className='rounded-b-full border object-cover aspect-square w-40 h-40 sm:w-56 sm:h-56 lg:w-50 lg:h-50 max-w-xs lg:max-w-none mx-auto'
+            />
           </div>
-          <p ref={paragraphRef} className='text-balance text-base md:text-xl'>
+          <p ref={paragraphRef} className='text-balance text-base md:text-xl text-justify p-2'>
             I'm Ian Mwendwa, a Fullstack Developer who thrives on solving problems through code to deliver simple, 
             efficient, and impactful digital products. My Computer Science foundation enables a holistic approach to development,
             encompassing everything from robust backend logic to intuitive frontend design. I believe in creating seamless, 

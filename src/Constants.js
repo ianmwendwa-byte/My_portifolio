@@ -17,7 +17,7 @@ export const NAV_LINKS = [
 // Social links
 export const SOCIAL_LINKS = [
   { icon: GitHubIcon, url: "https://github.com/ianmwendwa-byte" },
-  { icon: LinkedInIcon, url: "https://linkedin.com/in/mwendwaian" },
+  { icon: LinkedInIcon, url: "https://www.linkedin.com/in/ian-mwendwa-4227b32bb"},
   { icon: EmailIcon, url: "mailto:ianmwendwa5@gmail.com" }
 ];
 
@@ -32,6 +32,15 @@ export const HEROS =[
   {content:"My approach involves meticulous engineering of every layer,from seamless UIs to robust APIs,ensuring instant responsiveness and unwavering stability."},
   {content:"Expect nothing less than purpose-built, optimized solutions designed for ultimate reliability."}
 ]
+
+
+
+export const MobileHero = [
+  {content: "I Build high-performance, scalable full-stack systems"},
+  {content: "Engineer seamless UIs and robust APIs for instant responsiveness"},
+  {content: "Deliver optimized, reliable solutions with meticulous design"}
+
+];
 
 export const techStackIcons = [
   {
@@ -235,40 +244,25 @@ export const projects = [
     description: "A modern web application designed to showcase and preserve African oral literature. It features a clean, intuitive interface for exploring traditional stories, poems, and folklore from various cultures. The platform is built with a focus on cultural preservation, accessibility, and engaging visual presentation, making rich heritage easily discoverable for a global audience.",
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
     liveSiteLink: "https://oral-literature-demo.vercel.app", 
-    githubLink: "https://github.com/yourusername/oral-literature-repo" 
+    githubLink: "https://github.com/ianmwendwa-byte/Oral-literature-website.git" 
   },
   {
-    imageSrc: "/assets/oral-literature-website.webp",
-    title: "E-commerce Admin Dashboard",
-    description: "A comprehensive administrative dashboard for managing an e-commerce platform. This robust system allows for product management, order tracking, user administration, and sales analytics. It provides a centralized, user-friendly interface for store owners to efficiently oversee their online business operations and make data-driven decisions.",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Redux"],
-    liveSiteLink: "https://ecommerce-dashboard-demo.netlify.app",
-    githubLink: "https://github.com/yourusername/ecommerce-dashboard-repo"
+    imageSrc: "/assets/peponi-landing-page.webp",
+    title: "Peponi School Landing Page",
+    description: "The Peponi School Landing Page is a responsive, user-friendly website built with React and Tailwind CSS. It serves as a central hub for staff and pupils, offering seamless access to essential school websites and resources. The modern design ensures accessibility and ease of navigation, catering to the needs of the Peponi School community.",
+    technologies: ["React", "Tailwindcss", "React-reveal",],
+    liveSiteLink: "https://landingpage-peponi-school-sisy.vercel.app/",
+    githubLink: "https://github.com/ianmwendwa-byte/landingpage-peponi-school.git"
   },
   {
-    imageSrc: "/assets/oral-literature-website.webp",
-    title: "Collaborative Task Manager",
-    description: "A real-time, collaborative task management application designed for teams. Users can create, assign, and track tasks, set deadlines, and receive notifications. Features include drag-and-drop task reordering, user authentication, and real-time updates across all connected clients, fostering efficient teamwork and project completion.",
-    technologies: ["React", "Firebase", "Zustand", "GSAP", "CSS"],
-    liveSiteLink: "https://task-manager-app-demo.web.app",
-    githubLink: "https://github.com/yourusername/task-manager-repo"
+    imageSrc: "/assets/school-timetabling-system.webp",
+    title: "School Timetabling System",
+    description: "The School Timetabling System is a robust fullstack application showcasing expertise in modern web development. Powered by a Node.js/Express.js REST API and a MongoDB/MySQL backend, it delivers scalable, real-time management of school schedules. The responsive React/Tailwind CSS frontend ensures an intuitive, device-agnostic user experience.This system is ideal for schools seeking an automated, user-friendly solution for streamlined timetable management.",
+    technologies: ["React", "Tailwind CSS", "Nodejs", "Express.js", "MongoDB", "MaterialUI"],
+    liveSiteLink: "https://sts-staff-portal-i3om.vercel.app/",
+    githubLink: "https://github.com/ianmwendwa-byte/sts_staff_portal.git"
   },
-  {
-    imageSrc: "/assets/portfolio-website.png",
-    title: "Personal Portfolio Website",
-    description: "A dynamic and interactive personal portfolio website showcasing full-stack development skills and projects. It features modern UI/UX design, smooth animations powered by GSAP, and responsive layouts for optimal viewing on all devices. The site serves as a professional showcase of capabilities and a platform for client engagement.",
-    technologies: ["React", "Tailwind CSS", "GSAP", "Vite"],
-    liveSiteLink: "https://your-portfolio-live-link.com",
-    githubLink: "https://github.com/yourusername/your-portfolio-repo"
-  },
-  {
-    imageSrc: "/assets/oral-literature-website.webp",
-    title: "Modern Weather App",
-    description: "A sleek and responsive weather application providing real-time weather data, forecasts, and interactive maps. Users can search for locations worldwide and get detailed information including temperature, humidity, wind speed, and precipitation. The app features a clean design and leverages a third-party weather API for accurate data.",
-    technologies: ["React", "API Integration", "CSS Modules"],
-    liveSiteLink: "https://weather-app-demo.vercel.app",
-    githubLink: "https://github.com/yourusername/weather-app-repo"
-  }
+  
 ];
 
 
