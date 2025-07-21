@@ -4,9 +4,9 @@ import { SplitText } from 'gsap/SplitText';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(SplitText, ScrollTrigger);
 import SkillsCard from '../components/SkillsCard';
-import { skills, tools } from '../Constants';
-import BallCanvas from '../components/canvas/Ball';
+import { skills, tools,} from '../Constants';
 import TitleHeader from '../components/TitleHeader';
+import Tools from '../components/canvas/Tools';
 
 const Skills = () => {
   const sectionRef = useRef();
@@ -253,12 +253,10 @@ const Skills = () => {
       </div>
       <div>
         <h2 ref={toolsHeadlineRef} className='text-center text-2xl p-4'>TOOLS I USE</h2>
-        <div className='flex flex-row flex-wrap justify-center gap-10'>
-          {tools.map((tool) => (
-            <div className='w-20 h-20 tool-ball' key={tool.name}>
-              <BallCanvas icon={tool.icon} />
-            </div>
-          ))}
+        <div className="flex justify-center items-center w-full my-8">
+          <div className=" w-full lg:w-1/2 tool-ball">
+            <Tools icons={tools.map(tool => tool.icon)} />
+          </div>
         </div>
       </div>
     </section>

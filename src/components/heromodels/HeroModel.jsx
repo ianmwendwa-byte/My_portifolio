@@ -97,7 +97,7 @@ const OrbitingGroupAnimator = ({ children, orbitSpeed }) => {
 const HeroModel = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
-  const isDesktop = useMediaQuery({ query: '(min-width: 1025px)' }); // Explicit desktop check
+  const isDesktop = useMediaQuery({ query: '(min-width: 1025px)' });
 
   // Responsive Parameters for the circular arrangement and camera
   let orbitRadius;
@@ -106,28 +106,36 @@ const HeroModel = () => {
   let cameraFOV;
   let orbitControlsMinDistance;
   let orbitControlsMaxDistance;
+  let ambientLightIntensity;
+  let enableShadows;
 
   if (isMobile) {
-    orbitRadius = 2; // Smaller orbit for mobile
-    orbitSpeed = 0.008; // Slightly faster orbit on mobile
-    cameraZPosition = 8; // Closer camera for mobile
-    cameraFOV = 70; // Wider FOV for mobile
+    orbitRadius = 2;
+    orbitSpeed = 0.008;
+    cameraZPosition = 8;
+    cameraFOV = 70;
     orbitControlsMinDistance = 2;
     orbitControlsMaxDistance = 15;
+    ambientLightIntensity = 0.8; // Lower intensity for mobile
+    enableShadows = false; // Disable shadows for mobile
   } else if (isTablet) {
-    orbitRadius = 2.5; // Medium orbit for tablet
+    orbitRadius = 2.5;
     orbitSpeed = 0.006;
-    cameraZPosition = 9; // Medium camera distance
-    cameraFOV = 65; // Medium FOV
+    cameraZPosition = 9;
+    cameraFOV = 65;
     orbitControlsMinDistance = 3;
     orbitControlsMaxDistance = 18;
-  } else { // Desktop
-    orbitRadius = 4; // Original orbit radius
-    orbitSpeed = 0.005; // Original orbit speed
-    cameraZPosition = 10; // Original camera distance
-    cameraFOV = 50; // Original FOV
+    ambientLightIntensity = 1.2;
+    enableShadows = true;
+  } else {
+    orbitRadius = 4;
+    orbitSpeed = 0.005;
+    cameraZPosition = 10;
+    cameraFOV = 50;
     orbitControlsMinDistance = 5;
     orbitControlsMaxDistance = 20;
+    ambientLightIntensity = 1.5;
+    enableShadows = true;
   }
 
   // Lazy loading state for orbiting icons
@@ -139,20 +147,24 @@ const HeroModel = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // For mobile, only show central icon, no orbiting icons or particles
   return (
-    <Canvas camera={{ position: [5, 10, cameraZPosition], fov: cameraFOV }} shadows>
-      <ambientLight intensity={1.5} color="#ffffff" />
+    <Canvas camera={{ position: [5, 10, cameraZPosition], fov: cameraFOV }} shadows={enableShadows}>
+      <ambientLight intensity={ambientLightIntensity} color="#ffffff" />
       <HeroLights />
-      <Particles />
+      {!isMobile && <Particles />}
 
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        maxDistance={orbitControlsMaxDistance}
-        minDistance={orbitControlsMinDistance}
-        minPolarAngle={Math.PI / 5}
-        maxPolarAngle={Math.PI / 2}
-      />
+      {/* Disable OrbitControls on mobile for performance */}
+      {!isMobile && (
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          maxDistance={orbitControlsMaxDistance}
+          minDistance={orbitControlsMinDistance}
+          minPolarAngle={Math.PI / 5}
+          maxPolarAngle={Math.PI / 2}
+        />
+      )}
 
       <Suspense fallback={<CanvasLoader />}>
         {/* Central Git icon (not orbiting) loads immediately */}
@@ -165,8 +177,8 @@ const HeroModel = () => {
           />
         )}
 
-        {/* Orbiting icons are lazy loaded after delay */}
-        {showOrbitingIcons ? (
+        {/* Orbiting icons are lazy loaded after delay, but only for tablet/desktop */}
+        {!isMobile && showOrbitingIcons ? (
           <OrbitingGroupAnimator orbitSpeed={orbitSpeed}>
             {techStackIcons.filter(icon => icon.isOrbiting).map((icon, index, arr) => {
               const angle = (index / arr.length) * Math.PI * 2;
@@ -186,7 +198,7 @@ const HeroModel = () => {
           </OrbitingGroupAnimator>
         ) : (
           // Loader for orbiting icons
-          <group position={[0, 0, 0]}>
+          !isMobile && <group position={[0, 0, 0]}>
             <CanvasLoader />
           </group>
         )}

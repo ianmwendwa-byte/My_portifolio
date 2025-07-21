@@ -54,9 +54,9 @@ const heroRef = useRef();
             }
           );
         }
-        
-        
-        if (heroModelRef.current) {
+        // Only animate 3D model on non-mobile devices
+        const isMobile = window.innerWidth < 768;
+        if (heroModelRef.current && !isMobile) {
             gsap.fromTo(heroModelRef.current,
               {  opacity: 0 },
               {
@@ -65,6 +65,9 @@ const heroRef = useRef();
                 ease: 'power2.out'
               }
             );
+        } else if (heroModelRef.current && isMobile) {
+            // Instantly show model on mobile, no animation
+            heroModelRef.current.style.opacity = 1;
         }
             // Wait for fonts to be loaded before running SplitText animation
             document.fonts.ready.then(() => {
@@ -189,7 +192,7 @@ const heroRef = useRef();
     <section id='hero' className="bg-conic-180 from-background to-primary text-text relative h-svh lg:min-h-screen flex flex-col" ref={heroRef}>
 
       {/* Headline*/}
-      <div className="flex justify-center font-orbitron  text-3xl lg:text-5xl  mt-30 md:my-10 lg:my-20 z-10 line-clamp-none">
+      <div className="flex justify-center font-orbitron text-2xl md:text-3xl lg:text-5xl  mt-30 md:my-10 lg:my-20 z-10 line-clamp-none">
         <h1 className='headline opacity-0'>{SITE.description}</h1> 
       </div>
 
