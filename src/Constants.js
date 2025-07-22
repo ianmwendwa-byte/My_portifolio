@@ -243,7 +243,7 @@ export const projects = [
     title: "Oral Literature Platform",
     description: "A modern web application designed to showcase and preserve African oral literature. It features a clean, intuitive interface for exploring traditional stories, poems, and folklore from various cultures. The platform is built with a focus on cultural preservation, accessibility, and engaging visual presentation, making rich heritage easily discoverable for a global audience.",
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-    liveSiteLink: "https://oral-literature-demo.vercel.app", 
+    liveSiteLink: "https://oral-literature-website.vercel.app/", 
     githubLink: "https://github.com/ianmwendwa-byte/Oral-literature-website.git" 
   },
   {
