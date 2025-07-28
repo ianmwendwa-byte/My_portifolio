@@ -6,10 +6,15 @@ import Contact from "./sections/Contact"
 import Footer from "./sections/Footer"
 import gsap from "gsap"
 import Navbar from "./components/Navbar"
-
-
+import Clarity from '@microsoft/clarity';
+import { useEffect } from 'react';
 
 function App() {
+
+const projectId = "slz5rtrmxw";
+useEffect(() => {
+  Clarity.init(projectId);
+}, []);
 
   return (
     < >
