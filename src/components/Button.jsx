@@ -27,6 +27,7 @@ const Button = ({ link, text, Icon, className = '', external = false }) => {
       <span className="pointer-events-none text-sm sm:text-base md:text-lg">{text}</span>
     </a>
   );
-};
+
+}
 
 export default Button;

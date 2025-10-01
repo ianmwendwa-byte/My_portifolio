@@ -66,8 +66,8 @@ const ProjectsCard = ({ imageSrc, title, description, technologies, liveSiteLink
 
       {/* Buttons */}
       <div className='flex flex-row justify-between gap-4 w-full mt-auto'>
-        <Button text={"LIVE SITE"} link={liveSiteLink} />
-        <Button text={"GITHUB LINK"} link={githubLink} />
+        <Button text={"LIVE SITE"} link={liveSiteLink} external={true} />
+        <Button text={"GITHUB LINK"} link={githubLink} external={true} />
       </div>
 
       {/* Project Details Modal */}
