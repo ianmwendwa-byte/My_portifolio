@@ -24,7 +24,7 @@ export const SOCIAL_LINKS = [
 // Site metadata
 export const SITE = {
   name: "IAN MWENDWA",
-  description: "FULLSTACK DEVELOPER",
+  description: "SOFTWARE ENGINEER",
 };
 
 export const HEROS =[

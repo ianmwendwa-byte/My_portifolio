@@ -70,7 +70,7 @@ const Contact = () => {
           hasAnimatedRef.current = true;
           gsap.to(gradientProps.current, {
             angle: -60,
-            duration: 2,
+            duration: 1,
             ease: 'power2.out',
             onUpdate: updateGradient,
             onComplete: () => {
@@ -97,10 +97,10 @@ const Contact = () => {
                 {
                   y: 0,
                   opacity: 1,
-                  stagger: 0.2,
-                  duration: 1.2,
+                  stagger: 0.1,
+                  duration: 1,
                   ease: 'power4.inOut',
-                  delay: 0.2
+                  delay: 0.1
                 }
               );
             }
@@ -112,7 +112,7 @@ const Contact = () => {
         hasAnimatedRef.current = false;
         gsap.to(gradientProps.current, {
           angle: 0,
-          duration: 1.2,
+          duration: 1,
           ease: 'power2.out',
           onUpdate: updateGradient
         });

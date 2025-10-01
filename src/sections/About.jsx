@@ -121,7 +121,7 @@ const About = () => {
               />
             </div>
             <p ref={paragraphRef} className='text-balance text-base md:text-xl text-justify p-2'>
-              I'm Ian Mwendwa, a Fullstack Developer who thrives on solving problems through code to deliver simple,
+              I'm Ian Mwendwa, a Software Engineer who thrives on solving problems through code to deliver simple,
               efficient, and impactful digital products. My Computer Science foundation enables a holistic approach to development,
               encompassing everything from robust backend logic to intuitive frontend design. I believe in creating seamless,
               scalable systems that prioritize user experience and drive real value,
